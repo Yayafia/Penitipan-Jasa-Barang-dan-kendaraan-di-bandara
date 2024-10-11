@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran</title>
+    <link rel="stylesheet" href="tampilan2.css">
+</head>
+<body>
+    <nav>
+        <div class="">
+            <img src="/logo.jpg" alt="Logo">
+        </div>
+        <ul>
+            <li>
+                <a href="tugasbab2prak.html">Home</a>
+            </li>
+            <li>
+                <a href="register.html">Register</a>
+            </li>
+            <li>
+                <a href="tampilan.html">Tampilan</a>
+            </li>
+            <li>
+                <a href="dashboard.html">Dasboard</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="form-container">
+            <div class="icon-pembayaran"></div>
+            <h2>Pembayaran</h2>
+            <form action="tampilan2.html" method="POST">
+                <label for="metode-pembayaran">Metode Pembayaran:</label>
+                <select id="metode-pembayaran" name="metode-pembayaran" required>
+                    <option value="transfer">Transfer Bank</option>
+                    <option value="ewallet">E-Wallet (OVO, GoPay, DANA)</option>
+                    <option value="kartu-kredit">Kartu Kredit</option>
+                </select>
+
+                <label for="nama-pemilik">Nama Pemilik Rekening / Kartu:</label>
+                <input type="text" id="nama-pemilik" name="nama-pemilik" placeholder="Masukkan nama pemilik" required>
+
+                <label for="nomor-pembayaran">Nomor Rekening / Kartu / E-Wallet:</label>
+                <input type="text" id="nomor-pembayaran" name="nomor-pembayaran" placeholder="Masukkan nomor" required>
+
+                <label for="jumlah-pembayaran">Jumlah Pembayaran:</label>
+                <input type="text" id="jumlah-pembayaran" name="jumlah-pembayaran" value="Rp 100.000" readonly>
+
+                <label for="catatan">Catatan (Opsional):</label>
+                <textarea id="catatan" name="catatan" placeholder="Tambahkan catatan jika ada"></textarea>
+
+                <!-- Tampilkan data dari formulir sebelumnya -->
+                <div id="data-penitipan"></div>
+
+                <button type="submit">Bayar Sekarang</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const nama = urlParams.get('nama');
+        const jenis = urlParams.get('jenis');
+        const harga = urlParams.get('harga');
+        const lamaPenitipan = urlParams.get('lama-penitipan');
+        const dataContainer = document.getElementById('data-penitipan');
+        dataContainer.innerHTML = `<h3>Detail Penitipan:</h3>
+                                    <p>Nama: ${nama}</p>
+                                    <p>Jenis: ${jenis === 'barang' ? 'Penitipan Barang' : 'Penitipan Kendaraan'}</p>
+                                    <p>Lama Penitipan: ${lamaPenitipan} hari</p>
+                                    <p>Harga: ${harga}</p>`;
+    </script>
+</body>
+</html>

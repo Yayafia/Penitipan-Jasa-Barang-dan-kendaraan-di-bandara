@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengisian Data Diri - Penitipan Barang</title>
+    <link rel="stylesheet" href="tampilan2.css">
+    <script>
+        function updateHarga() {
+            var tipeBarang = document.getElementById("tipe-barang").value;
+            var hargaInput = document.getElementById("harga");
+
+            // Tetapkan harga berdasarkan pilihan barang
+            if (tipeBarang === "koper") {
+                hargaInput.value = "30Rb";
+            } else if (tipeBarang === "tas-ransel") {
+                hargaInput.value = "15Rb";
+            } else if (tipeBarang === "kardus") {
+                hargaInput.value = "5Rb";
+            }
+        }
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="">
+            <img src="/logo.jpg" alt="Logo">
+        </div>
+        <ul>
+            <li>
+                <a href="tugasbab2prak.html">Home</a>
+            </li>
+            <li>
+                <a href="register.html">Register</a>
+            </li>
+            <li>
+                <a href="tampilan.html">Tampilan</a>
+            </li>
+            <li>
+                <a href="dashboard.html">Dashboard</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="form-container">
+            <div class="icon-barang"></div>
+            <h2>Data Diri Penitipan Jasa Barang</h2>
+            <form action="pembayaran.html" method="GET">
+                <label for="nama">Nama Penitip:</label>
+                <input type="text" id="nama" name="nama" required>
+                
+                <label for="tipe-barang">Tipe Barang:</label>
+                <select id="tipe-barang" name="tipe-barang" onchange="updateHarga()" required>
+                    <option value="koper">Koper</option>
+                    <option value="tas-ransel">Tas Ransel</option>
+                    <option value="kardus">Kardus</option>
+                </select>
+                
+                <label for="berat-barang">Berat Barang (kg):</label>
+                <input type="number" id="berat-barang" name="berat-barang" placeholder="Masukkan berat barang" required>
+                
+                <label for="lama-penitipan">Lama Penitipan Per hari:</label>
+                <input type="number" id="lama-penitipan" name="lama-penitipan" placeholder="Lama Per hari" required>
+                
+                <label for="harga">Harga :</label>
+                <input type="text" id="harga" name="harga" value="30Rb" readonly>
+                <input type="hidden" name="jenis" value="barang">
+                
+                <button type="submit">Lanjut ke Pembayaran</button>
+            </form>
+            
+            
+        </div>
+    </main>
+</body>
+</html>

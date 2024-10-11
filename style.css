@@ -1,0 +1,91 @@
+*, html {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(/background.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+nav {
+    background-color:#58b3ff;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+}
+
+nav div img {
+    width: 50px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-family: 'Segoe UI', sans-serif;
+    color: #191919;
+    font-weight: 600;
+    padding: 8px 0;
+    transform: all;
+    transition-duration: 300ms;
+    border-bottom: 1px solid rgba(0, 217, 255);
+}
+
+nav ul li a:hover {
+    color: #fff;
+    border-bottom: 1px solid black;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    height: 88%;
+    align-items: center;
+}
+
+.text-col {
+    flex-basis: 50%;
+    padding-left: 50px;
+}
+
+.image-col {
+    flex-basis: 50%;
+    text-align: right;
+    padding-right: 50px;
+}
+
+.image-col img {
+    max-width: 100%;
+    height: auto;
+}
+
+h1 {
+    color: #fff;
+    font-size: 50px; /* Sesuaikan ukuran teks sesuai kebutuhan */
+}
+
+p {
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+button {
+    width: 180px;
+    color: #000;
+    font-size: 14px;
+    padding: 12px;
+    background: #fff;
+    border: 0;
+    border-radius: 20px;
+    margin-top: 30px;
+}
