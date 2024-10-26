@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="login.css"/>
+    <link rel="stylesheet" href="/praktikum pemweb, vscode/login.css"/>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <nav>
         <div class="">
-            <img src="/logo.jpg" alt="Logo">
+            <img src="/praktikum pemweb, vscode/logo.jpg" alt="Logo">
         </div>
         <ul>
             <li>
@@ -27,7 +27,7 @@
             </li>
         </ul>
     </nav>
-    <img class="wave" src="/imge1.png"/>
+    <img class="wave" src="/praktikum pemweb, vscode/imge1.png"/>
     <div class="wrapper">
         <form action="">
             <h1>LOGIN</h1>
@@ -51,5 +51,21 @@
             </div>
         </form>
     </div>
+
+    <div id="snackbar-login">Login successful!</div>
+    <script>
+        function showSnackbarLogin() {
+            var snackbar = document.getElementById("snackbar-login");
+            snackbar.className = "show";
+            setTimeout(function(){ 
+                snackbar.className = snackbar.className.replace("show", ""); 
+            }, 3000);
+        }
+    
+        document.querySelector('.btn').addEventListener('click', function(event) {
+            event.preventDefault(); // Mencegah submit default
+            showSnackbarLogin(); // Memunculkan snackbar
+        });
+    </script>    
 </body>
 </html>
