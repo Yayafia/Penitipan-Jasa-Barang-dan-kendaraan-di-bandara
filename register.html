@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="register.css"/>
+    <link rel="stylesheet" href="/praktikum pemweb, vscode/register.css"/>
 </head>
 <body>
     <nav>
         <div class="">
-            <img src="/logo.jpg" alt="Logo">
+            <img src="/praktikum pemweb, vscode/logo.jpg" alt="Logo">
         </div>
         <ul>
             <li>
@@ -26,7 +26,7 @@
             </li>
         </ul>
     </nav>
-    <img class="wave" src="/imge1.png"/>
+    <img class="wave" src="/praktikum pemweb, vscode/imge1.png"/>
     <div class="wrapper">
         <form action="">
             <h1>SIGN UP</h1>
@@ -53,5 +53,21 @@
             <button type="submit" class="btn">CREATE ACCOUNT</button>
         </form>
     </div>
+
+    <div id="snackbar-register">Account successfully created!</div>
+    <script>
+        function showSnackbarRegister() {
+            var snackbar = document.getElementById("snackbar-register");
+            snackbar.className = "show";
+            setTimeout(function(){ 
+                snackbar.className = snackbar.className.replace("show", ""); 
+            }, 3000);
+        }
+    
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah submit default
+            showSnackbarRegister(); // Memunculkan snackbar
+        });
+    </script>    
 </body>
 </html>
