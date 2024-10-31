@@ -13,5 +13,25 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Anda memulai penjelajahan di website ini!');
     });
 
+
+    const secondHeading = document.querySelector('#second-heading');
+    secondHeading.textContent = 'Layanan Penitipan Barang dan Kendaraan';
+
+
+    const secondImage = document.querySelector('#second-image');
+    secondImage.src = 'imgsaran.jpg';
+
+
+    const contactForm = document.querySelector('#contactForm');
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const name = document.querySelector('#name').value;
+        const message = document.querySelector('#message').value;
+        if (name && message) {
+            alert(`Terima kasih, ${name}, pesan Anda telah terkirim!`);
+        } else {
+            alert('Harap isi semua kolom!');
+        }
+    });
 });
 
