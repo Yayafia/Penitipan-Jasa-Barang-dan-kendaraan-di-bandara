@@ -4,26 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pembayaran</title>
-    <link rel="stylesheet" href="tampilan2.css">
+    <link rel="stylesheet" href="/praktikum pemweb, vscode/tampilan2.css">
 </head>
 <body>
     <nav>
         <div class="">
-            <img src="/logo.jpg" alt="Logo">
+            <img src="/praktikum pemweb, vscode/logo.jpg" alt="Logo">
         </div>
         <ul>
-            <li>
-                <a href="tugasbab2prak.html">Home</a>
-            </li>
-            <li>
-                <a href="register.html">Register</a>
-            </li>
-            <li>
-                <a href="tampilan.html">Tampilan</a>
-            </li>
-            <li>
-                <a href="dashboard.html">Dasboard</a>
-            </li>
+            <li><a href="tugasbab2prak.html">Home</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="tampilan.html">Tampilan</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
         </ul>
     </nav>
 
@@ -31,7 +23,7 @@
         <div class="form-container">
             <div class="icon-pembayaran"></div>
             <h2>Pembayaran</h2>
-            <form action="tampilan2.html" method="POST">
+            <form id="payment-form">
                 <label for="metode-pembayaran">Metode Pembayaran:</label>
                 <select id="metode-pembayaran" name="metode-pembayaran" required>
                     <option value="transfer">Transfer Bank</option>
@@ -46,12 +38,11 @@
                 <input type="text" id="nomor-pembayaran" name="nomor-pembayaran" placeholder="Masukkan nomor" required>
 
                 <label for="jumlah-pembayaran">Jumlah Pembayaran:</label>
-                <input type="text" id="jumlah-pembayaran" name="jumlah-pembayaran" value="Rp 100.000" readonly>
+                <input type="text" id="jumlah-pembayaran" name="jumlah-pembayaran" readonly>
 
                 <label for="catatan">Catatan (Opsional):</label>
                 <textarea id="catatan" name="catatan" placeholder="Tambahkan catatan jika ada"></textarea>
 
-                <!-- Tampilkan data dari formulir sebelumnya -->
                 <div id="data-penitipan"></div>
 
                 <button type="submit">Bayar Sekarang</button>
@@ -60,17 +51,65 @@
     </main>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const nama = urlParams.get('nama');
-        const jenis = urlParams.get('jenis');
-        const harga = urlParams.get('harga');
-        const lamaPenitipan = urlParams.get('lama-penitipan');
-        const dataContainer = document.getElementById('data-penitipan');
-        dataContainer.innerHTML = `<h3>Detail Penitipan:</h3>
-                                    <p>Nama: ${nama}</p>
-                                    <p>Jenis: ${jenis === 'barang' ? 'Penitipan Barang' : 'Penitipan Kendaraan'}</p>
-                                    <p>Lama Penitipan: ${lamaPenitipan} hari</p>
-                                    <p>Harga: ${harga}</p>`;
+        // Mengambil data dari localStorage
+        const barangData = JSON.parse(localStorage.getItem('penitipanBarangData'));
+        const kendaraanData = JSON.parse(localStorage.getItem('penitipanKendaraanData'));
+        const detailContainer = document.getElementById('data-penitipan');
+        let totalHarga = 0;
+
+        // Menentukan data yang akan ditampilkan
+        if (barangData) {
+            totalHarga = parseInt(barangData.harga.replace('Rb', '')) * 1000 * barangData.lamaPenitipan; 
+            document.getElementById('jumlah-pembayaran').value = `Rp ${totalHarga}`;
+            detailContainer.innerHTML = `<h3>Detail Penitipan:</h3>
+                                          <p>Nama: ${barangData.nama}</p>
+                                          <p>Jenis: Penitipan Barang</p>
+                                          <p>Tipe: ${barangData.tipeBarang}</p>
+                                          <p>Lama Penitipan: ${barangData.lamaPenitipan} hari</p>
+                                          <p>Harga Per Hari: ${barangData.harga}</p>
+                                          <p>Total Harga: Rp ${totalHarga}</p>`;
+        } else if (kendaraanData) {
+            totalHarga = parseInt(kendaraanData.harga.replace('Rb', '')) * 1000 * kendaraanData.lamaPenitipan; 
+            document.getElementById('jumlah-pembayaran').value = `Rp ${totalHarga}`;
+            detailContainer.innerHTML = `<h3>Detail Penitipan:</h3>
+                                          <p>Nama: ${kendaraanData.nama}</p>
+                                          <p>Jenis: Penitipan Kendaraan</p>
+                                          <p>Tipe: ${kendaraanData.tipeKendaraan}</p>
+                                          <p>Lama Penitipan: ${kendaraanData.lamaPenitipan} hari</p>
+                                          <p>Harga Per Hari: ${kendaraanData.harga}</p>
+                                          <p>Total Harga: Rp ${totalHarga}</p>`;
+        } else {
+            detailContainer.innerHTML = `<p>Tidak ada data penitipan.</p>`;
+        }
+
+        document.getElementById('payment-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah submit default
+            
+            // Kumpulkan data pembayaran
+            const paymentData = {
+                metodePembayaran: document.getElementById("metode-pembayaran").value,
+                namaPemilik: document.getElementById("nama-pemilik").value,
+                nomorPembayaran: document.getElementById("nomor-pembayaran").value,
+                jumlahPembayaran: document.getElementById("jumlah-pembayaran").value,
+                catatan: document.getElementById("catatan").value,
+                kategori: barangData ? "Penitipan Barang" : "Penitipan Kendaraan", // Tentukan kategori
+                tanggal: new Date().toLocaleDateString()
+            };
+
+            // Ambil data transaksi yang sudah ada di localStorage
+            const existingData = JSON.parse(localStorage.getItem('paymentDataArray')) || [];
+
+            // Tambahkan data baru ke dalam array
+            existingData.push(paymentData);
+
+            // Simpan kembali array yang diperbarui ke localStorage
+            localStorage.setItem('paymentDataArray', JSON.stringify(existingData));
+
+            // Alihkan ke halaman Transaction
+            window.location.href = '/praktikum pemweb, vscode/transaction.html';
+        });
     </script>
+    
+    <div id="snackbar-pembayaran">Pembayaran berhasil!</div>
 </body>
 </html>
