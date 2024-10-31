@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pengisian Data Diri - Penitipan Barang</title>
-    <link rel="stylesheet" href="tampilan2.css">
+    <link rel="stylesheet" href="/praktikum pemweb, vscode/tampilan2.css">
     <script>
         function updateHarga() {
             var tipeBarang = document.getElementById("tipe-barang").value;
             var hargaInput = document.getElementById("harga");
 
-            // Tetapkan harga berdasarkan pilihan barang
             if (tipeBarang === "koper") {
                 hargaInput.value = "30Rb";
             } else if (tipeBarang === "tas-ransel") {
@@ -19,26 +18,47 @@
                 hargaInput.value = "5Rb";
             }
         }
+
+        function addTotalHarga() {
+            const hargaPerHari = parseInt(document.getElementById('harga').value.replace('Rb', '')) * 1000;
+            const lamaPenitipan = parseInt(document.getElementById('lama-penitipan').value);
+            const totalHarga = hargaPerHari * lamaPenitipan;
+            document.getElementById('total-harga').value = totalHarga; // Menyimpan total harga di field tersembunyi
+        }
+
+        async function saveData(event) {
+            event.preventDefault(); 
+
+            
+            const formData = {
+                nama: document.getElementById("nama").value,
+                tipeBarang: document.getElementById("tipe-barang").value,
+                beratBarang: document.getElementById("berat-barang").value,
+                lamaPenitipan: document.getElementById("lama-penitipan").value,
+                harga: document.getElementById("harga").value,
+                totalHarga: document.getElementById("total-harga").value
+            };
+
+            // Simpan data ke localStorage
+            localStorage.setItem('penitipanBarangData', JSON.stringify(formData));
+            
+            localStorage.removeItem('penitipanKendaraanData');
+
+            // Alihkan ke halaman pembayaran
+            window.location.href = 'pembayaran.html';
+        }
     </script>
 </head>
 <body>
     <nav>
         <div class="">
-            <img src="/logo.jpg" alt="Logo">
+            <img src="/praktikum pemweb, vscode/logo.jpg" alt="Logo">
         </div>
         <ul>
-            <li>
-                <a href="tugasbab2prak.html">Home</a>
-            </li>
-            <li>
-                <a href="register.html">Register</a>
-            </li>
-            <li>
-                <a href="tampilan.html">Tampilan</a>
-            </li>
-            <li>
-                <a href="dashboard.html">Dashboard</a>
-            </li>
+            <li><a href="tugasbab2prak.html">Home</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="tampilan.html">Tampilan</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
         </ul>
     </nav>
 
@@ -46,7 +66,7 @@
         <div class="form-container">
             <div class="icon-barang"></div>
             <h2>Data Diri Penitipan Jasa Barang</h2>
-            <form action="pembayaran.html" method="GET">
+            <form onsubmit="saveData(event)">
                 <label for="nama">Nama Penitip:</label>
                 <input type="text" id="nama" name="nama" required>
                 
@@ -66,11 +86,10 @@
                 <label for="harga">Harga :</label>
                 <input type="text" id="harga" name="harga" value="30Rb" readonly>
                 <input type="hidden" name="jenis" value="barang">
-                
+                <input type="hidden" id="total-harga" name="total-harga" value="">
+
                 <button type="submit">Lanjut ke Pembayaran</button>
             </form>
-            
-            
         </div>
     </main>
 </body>
