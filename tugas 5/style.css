@@ -1,0 +1,201 @@
+*, html {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(background.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+nav {
+    background-color:#58b3ff;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+}
+
+nav div img {
+    width: 50px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-family: 'Segoe UI', sans-serif;
+    color: #191919;
+    font-weight: 600;
+    padding: 8px 0;
+    transform: all;
+    transition-duration: 300ms;
+    border-bottom: 1px solid rgba(0, 217, 255);
+}
+
+nav ul li a:hover {
+    color: #fff;
+    border-bottom: 1px solid black;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    height: 88%;
+    align-items: center;
+}
+
+.text-col {
+    flex-basis: 50%;
+    padding-left: 50px;
+}
+
+.image-col {
+    flex-basis: 50%;
+    text-align: right;
+    padding-right: 50px;
+}
+
+.image-col img {
+    max-width: 100%;
+    height: auto;
+}
+
+h1 {
+    color: #fff;
+    font-size: 50px; 
+}
+
+p {
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+button {
+    width: 180px;
+    color: #000;
+    font-size: 14px;
+    padding: 12px;
+    background: #fff;
+    border: 0;
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
+/* Styling untuk bagian form */
+.contact-form {
+    background-color: rgba(255, 255, 255, 0.9); /* Transparansi lembut */
+    padding: 20px;
+    margin: 50px auto;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.contact-form h3 {
+    font-size: 24px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #191919;
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.contact-form input[type="text"],
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.contact-form textarea {
+    height: 100px;
+    resize: none;
+}
+
+.contact-form button {
+    background-color: #58b3ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 300ms ease;
+}
+
+.contact-form button:hover {
+    background-color: #004b8d; /* Warna lebih gelap saat dihover */
+}
+
+.gambar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px; /* Reduce padding to make it smaller */
+    background-color: rgba(0, 0, 0, 0.5); /* Background transparan hitam */
+    border-radius: 10px;
+    margin: 40px auto; /* Increase top and bottom margins for more space */
+    max-width: 800px; /* Reduce the maximum width */
+}
+
+.gambar-text h2 {
+    color: white;
+    font-size: 28px; /* Reduce the font size */
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 700;
+    margin-bottom: 10px; /* Reduce bottom margin */
+}
+
+.gambar-image img {
+    width: 250px; /* Reduce the image width */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Adjust the hover effect */
+.gambar-image img:hover {
+    transform: scale(1.03); /* Slightly reduce scale on hover */
+    transition: transform 300ms ease;
+}
+
+
+/* Responsif */
+@media (max-width: 768px) {
+    .gambar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .gambar-text, .gambar-image {
+        padding: 10px;
+    }
+
+    .gambar-image img {
+        width: 80%;
+    }
+
+    .contact-form {
+        width: 90%;
+    }
+}
+
